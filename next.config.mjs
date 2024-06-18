@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "/chore-shuffler",
   output: "export",
-  reactStrictMode: true,
+  basePath: "/chore-shuffler",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
