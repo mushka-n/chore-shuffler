@@ -1,5 +1,4 @@
 import { integer, json, pgTable, serial, text } from "drizzle-orm/pg-core";
-import { Repetiton, Weekday } from "./types";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -16,8 +15,8 @@ export const chores = pgTable("chores", {
 
 export const schedule = pgTable("schedule", {
   id: serial("id").primaryKey(),
-  weekday: text("weekday").$type<Weekday>().notNull(),
-  repetition: text("repetition").$type<Repetiton>().notNull(),
+  weekday: integer("weekday").notNull(),
+  repetition: integer("repetition").notNull(),
   choreId: integer("choreId")
     .notNull()
     .references(() => chores.id),

@@ -1,12 +1,10 @@
+import { schedule } from "./../../../database/schema";
 import { NextResponse } from "next/server";
 import { SelectChore, SelectSchedule } from "@/database/types";
-
-type ScheduleFullEntry = Omit<SelectSchedule, "choreId"> & {
-  chore: SelectChore;
-};
+import api from "..";
 
 export const GET = async () => {
-  let schedule = await fetch("http://localhost:3000/api/schedule");
+  let schedule = await api.schedule.GET();
   schedule = await schedule.json();
 
   return NextResponse.json(schedule);

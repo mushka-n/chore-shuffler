@@ -1,10 +1,12 @@
-import ChoreTable from "./components/ChoreTable";
+import ScheduleDataTable from "@/components/data-tables/schedule";
+import CreateScheduleEntryForm from "@/components/forms/create-schedule-entry";
 
 const DashboardPage = () => {
   return (
-    <main className="w-screen h-screen flex items-start justify-center p-4 bg-zinc-900">
-      <div className="text-4xl font-bold text-zinc-100">Chore Shuffler</div>
-      <ChoreTable />
+    <main className="w-screen h-screen flex flex-col items-center justify-start p-4 bg-neutral-950">
+      <div className="text-4xl font-bold text-neutral-100">Chore Shuffler</div>
+      <CreateScheduleEntryForm />
+      <ScheduleDataTable />
     </main>
   );
 };

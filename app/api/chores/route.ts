@@ -1,5 +1,9 @@
+import { db } from "@/database";
+import { chores } from "@/database/schema";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
-  return NextResponse.json({ message: "Hello, world!" });
+  let data = await db.select().from(chores);
+
+  return NextResponse.json(data);
 };

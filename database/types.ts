@@ -1,16 +1,5 @@
 import { chores, schedule, users } from "./schema";
 
-export type Weekday =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
-
-export type Repetiton = "everyWeek" | "everyTwoWeeks" | "everyMonth";
-
 export type InsertUser = typeof users.$inferInsert;
 export type SelectUser = typeof users.$inferSelect;
 

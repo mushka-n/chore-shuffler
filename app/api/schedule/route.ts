@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { InsertSchedule, SelectChore, SelectSchedule } from "@/database/types";
 
-type ScheduleFullEntry = Omit<SelectSchedule, "choreId"> & {
+export type ScheduleFullEntry = Omit<SelectSchedule, "choreId"> & {
   chore: SelectChore;
 };
 
@@ -26,10 +26,8 @@ export const GET = async () => {
   return NextResponse.json(joinedData);
 };
 
-export const POST = async (request: NextRequest) => {
-  const body: InsertSchedule = await request.json();
-
+export const POST = async (body: InsertSchedule) => {
+  console.log(body);
   const newScheduleEntry = await db.insert(schedule).values(body).returning();
-
   return NextResponse.json(newScheduleEntry);
 };
