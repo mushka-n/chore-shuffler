@@ -26,8 +26,19 @@ export const GET = async () => {
   return NextResponse.json(joinedData);
 };
 
-export const POST = async (body: InsertSchedule) => {
-  console.log(body);
-  const newScheduleEntry = await db.insert(schedule).values(body).returning();
+export const POST = async (request: NextRequest) => {
+  const data: InsertSchedule = await request.json();
+  const [newScheduleEntry] = await db.insert(schedule).values(data).returning();
   return NextResponse.json(newScheduleEntry);
+};
+
+export const DELETE = async (request: NextRequest) => {
+  const { scheduleEntryIds }: { scheduleEntryIds: number[] } =
+    await request.json();
+
+  scheduleEntryIds.forEach(async (scheduleEntryId) => {
+    await db.delete(schedule).where(eq(schedule.id, scheduleEntryId));
+  });
+
+  return NextResponse.json({ message: "Schedule entries deleted" });
 };

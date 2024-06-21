@@ -1,6 +1,7 @@
 import { SelectChore } from "@/database/types";
 import CreateScheduleEntryForm from "./form";
 import api from "@/app/api";
+import { NextRequest } from "next/server";
 
 interface CreateScheduleEntryProps {}
 
@@ -18,11 +19,12 @@ const CreateScheduleEntry = async ({}: CreateScheduleEntryProps) => {
       return;
     }
 
-    await api.schedule.POST({
-      choreId,
-      weekday,
-      repetition,
-    });
+    await api.schedule.POST(
+      new NextRequest("http://localhost:3000/api/schedule", {
+        method: "POST",
+        body: JSON.stringify({ choreId, weekday, repetition }),
+      })
+    );
   };
 
   return (
