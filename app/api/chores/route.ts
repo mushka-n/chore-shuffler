@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { getSchedule } from "@/actions/schedule/getSchedule";
+import { getChores } from "@/actions/chores/getChores";
 
 export const GET = async () => {
-  const data = await getSchedule();
+  const data = await getChores();
   return NextResponse.json(data);
 };

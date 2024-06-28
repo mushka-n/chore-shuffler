@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ScheduleFullEntry, SelectSchedule } from "@/database/types";
+import { Chore } from "@/database/types";
 import { getRepetition, getWeekDay } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -13,66 +13,61 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Edit, MoreVertical, Trash } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { deleteScheduleEntry } from "@/actions/schedule/deleteScheduleEntry";
+import { deleteChore } from "@/actions/chores/deleteChore";
 import React, { useState } from "react";
-import CreateEditScheduleEntryDialog from "@/components/dialogs/create-edit-schedule-entry";
+import EditChoreDialog from "@/components/dialogs/create-edit-chore/edit-chore";
 
-const ScheduleContent = ({ data }: { data: ScheduleFullEntry[] }) => {
+const ChoresContent = ({ data }: { data: Chore[] }) => {
   const [scheduleEntryEditingId, setScheduleEntryEditingId] = useState<
     number | null
   >(null);
 
   return (
     <div className="w-full grid grid-rows-1 gap-4 grid-cols-1 px-4 max-w-[800px]">
-      {data.map((scheduleEntry) => (
+      {data.map((chore) => (
         <div
-          key={scheduleEntry.id}
+          key={chore.id}
           className="w-full h-fit flex flex-col gap-5 dark:bg-neutral-900 p-4 rounded-md border border-neutral-800 relative min-w-[500px]"
         >
-          <CreateEditScheduleEntryDialog
-            isEdit
-            isOpen={scheduleEntryEditingId === scheduleEntry.id}
+          <EditChoreDialog
+            isOpen={scheduleEntryEditingId === chore.id}
             setIsOpen={() => setScheduleEntryEditingId(null)}
-            initialData={{
-              ...scheduleEntry,
-              assignee: scheduleEntry.assignee?.id || null,
+            initialState={{
+              ...chore,
+              assignee: chore.assignee?.id || null,
             }}
           />
 
           <div className="w-fit h-fit flex items-center gap-3">
-            <div className={"text-xl font-semibold h-fit"}>
-              {scheduleEntry.chore.title}
-            </div>
+            <div className={"text-xl font-semibold h-fit"}>{chore.title}</div>
 
             <Badge
               className={twMerge(
                 "w-fit h-6 font-semibold",
-                scheduleEntry.chore.points < 4 &&
-                  "dark:bg-green-500 dark:hover:bg-green-500",
-                scheduleEntry.chore.points >= 4 &&
-                  scheduleEntry.chore.points < 8 &&
+                chore.points < 4 && "dark:bg-green-500 dark:hover:bg-green-500",
+                chore.points >= 4 &&
+                  chore.points < 8 &&
                   "dark:bg-orange-500 dark:hover:bg-orange-500",
-                scheduleEntry.chore.points >= 8 &&
-                  "dark:bg-red-500 dark:hover:bg-red-500"
+                chore.points >= 8 && "dark:bg-red-500 dark:hover:bg-red-500"
               )}
             >
-              {scheduleEntry.chore.points} points
+              {chore.points} points
             </Badge>
 
-            {scheduleEntry.assignee && (
+            {chore.assignee && (
               <Badge
                 variant={"secondary"}
                 className={twMerge(
                   "w-fit h-6 font-semibold dark:hover:bg-neutral-800"
                 )}
               >
-                {scheduleEntry.assignee.name}
+                {chore.assignee.name}
               </Badge>
             )}
           </div>
 
           <div className={"flex flex-col gap-2 self-start"}>
-            {scheduleEntry.repetitions.map((repetition, index) => (
+            {chore.repetitions.map((repetition, index) => (
               <div
                 key={index}
                 className="flex gap-4 items-center justify-start"
@@ -112,7 +107,7 @@ const ScheduleContent = ({ data }: { data: ScheduleFullEntry[] }) => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
-                  onClick={(e) => setScheduleEntryEditingId(scheduleEntry.id)}
+                  onClick={(e) => setScheduleEntryEditingId(chore.id)}
                   className="flex items-center cursor-pointer h-8"
                 >
                   <Edit className="mr-2 h-4 w-4" />
@@ -120,7 +115,7 @@ const ScheduleContent = ({ data }: { data: ScheduleFullEntry[] }) => {
                 </DropdownMenuItem>
                 <Separator className="my-1" />
                 <DropdownMenuItem
-                  onClick={() => deleteScheduleEntry(scheduleEntry.id)}
+                  onClick={() => deleteChore(chore.id)}
                   className="flex items-center cursor-pointer h-8"
                 >
                   <Trash className="mr-2 h-4 w-4 " />
@@ -135,4 +130,4 @@ const ScheduleContent = ({ data }: { data: ScheduleFullEntry[] }) => {
   );
 };
 
-export default ScheduleContent;
+export default ChoresContent;

@@ -1,5 +1,6 @@
 import { integer, json, pgTable, serial, text } from "drizzle-orm/pg-core";
-import { Chore, Repetition } from "./types";
+import { Repetition } from "./types";
+import { sql } from "drizzle-orm";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -7,9 +8,10 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
 });
 
-export const schedule = pgTable("schedule", {
+export const chores = pgTable("chores", {
   id: serial("id").primaryKey(),
-  assignee: integer("assignee").references(() => users.id),
-  chore: json("chore").$type<Chore>().notNull(),
+  title: text("title").notNull(),
+  points: integer("points").notNull(),
   repetitions: json("repetitions").$type<Repetition[]>().notNull(),
+  assignee: integer("assignee").references(() => users.id),
 });

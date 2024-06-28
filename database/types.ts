@@ -1,10 +1,4 @@
-import { schedule, users } from "./schema";
-
-export type Chore = {
-  title: string;
-  description?: string;
-  points: number;
-};
+import { chores, users } from "./schema";
 
 export type Repetition = {
   weekdays: number[];
@@ -14,10 +8,9 @@ export type Repetition = {
 export type InsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
 
-export type InsertSchedule = typeof schedule.$inferInsert;
-export type SelectSchedule = typeof schedule.$inferSelect;
-
-export type ScheduleFullEntry = Omit<SelectSchedule, "assignee"> & {
+export type InsertChore = typeof chores.$inferInsert;
+export type SelectChore = typeof chores.$inferSelect;
+export type Chore = Omit<SelectChore, "assignee"> & {
   assignee: User | null;
 };
 

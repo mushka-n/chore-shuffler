@@ -1,12 +1,12 @@
-import ScheduleContent from "./content";
-import { getSchedule } from "@/actions/schedule/getSchedule";
+import ChoresContent from "./content";
+import { getChores } from "@/actions/chores/getChores";
 
 const SchedulePage = async () => {
-  let schedule = await getSchedule();
+  let chores = await getChores();
 
   return (
     <main className="border-box w-screen max-w-full h-full flex flex-col items-center justify-start bg-black px-20">
-      <ScheduleContent data={schedule} />
+      <ChoresContent data={chores} />
     </main>
   );
 };

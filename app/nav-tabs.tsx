@@ -16,8 +16,8 @@ const NavTabs = ({}: TabsProps) => {
           <TabsTrigger asChild value="/week-shuffle" className="w-48">
             <Link href="/week-shuffle">This week`s shuffle</Link>
           </TabsTrigger>
-          <TabsTrigger asChild value="/schedule" className="w-48">
-            <Link href="/schedule">Full schedule</Link>
+          <TabsTrigger asChild value="/chores" className="w-48">
+            <Link href="/chores">All chores</Link>
           </TabsTrigger>
         </TabsList>
       </Tabs>
