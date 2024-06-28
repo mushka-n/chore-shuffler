@@ -1,10 +1,10 @@
+import { getSchedule } from "@/actions/schedule/getSchedule";
 import ScheduleTable from "./table";
-import api from "@/app/api";
 
 interface ScheduleDataTableProps {}
 
 const ScheduleDataTable = async ({}: ScheduleDataTableProps) => {
-  let schedule = await api.schedule.GET().then((res) => res.json());
+  let schedule = await getSchedule();
 
   return <ScheduleTable data={schedule} />;
 };

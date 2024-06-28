@@ -17,13 +17,13 @@ import { deleteScheduleEntry } from "@/actions/schedule/deleteScheduleEntry";
 import React, { useState } from "react";
 import CreateEditScheduleEntryDialog from "@/components/dialogs/create-edit-schedule-entry";
 
-const ScheduleTable = ({ data }: { data: ScheduleFullEntry[] }) => {
+const ScheduleContent = ({ data }: { data: ScheduleFullEntry[] }) => {
   const [scheduleEntryEditingId, setScheduleEntryEditingId] = useState<
     number | null
   >(null);
 
   return (
-    <div className="w-full grid grid-rows-1 gap-4 grid-cols-1 mt-2 min-[1200px]:grid-cols-2 min-[1800px]:grid-cols-3">
+    <div className="w-full grid grid-rows-1 gap-4 grid-cols-1 px-4 max-w-[800px]">
       {data.map((scheduleEntry) => (
         <div
           key={scheduleEntry.id}
@@ -135,4 +135,4 @@ const ScheduleTable = ({ data }: { data: ScheduleFullEntry[] }) => {
   );
 };
 
-export default ScheduleTable;
+export default ScheduleContent;
