@@ -1,41 +1,27 @@
 "use client";
 
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
 import * as React from "react";
 import { InsertChore } from "@/database/types";
 import { createChore } from "@/actions/chores/createChore";
-import { useState } from "react";
 import CreateEditChoreDialogContent from "./content";
 
 type CreateChoreDialogProps = {
-  isOpen?: boolean;
-  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-  trigger?: React.ReactNode;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateChoreDialog = ({
-  isOpen: extIsOpen,
-  setIsOpen: extSetIsOpen,
-  trigger,
-}: CreateChoreDialogProps) => {
-  const [intIsOpen, setIntIsOpen] = useState<boolean>(false);
-  const [isOpen, setIsOpen] =
-    extIsOpen !== undefined && extSetIsOpen
-      ? [extIsOpen, extSetIsOpen]
-      : [intIsOpen, setIntIsOpen];
-
+const CreateChoreDialog = ({ isOpen, setIsOpen }: CreateChoreDialogProps) => {
   const onSubmitForm = async (chore: InsertChore) => {
     await createChore(chore);
   };
 
   const onCloseDialog = () => {
-    if (isOpen && setIsOpen) setIsOpen(false);
+    setIsOpen(false);
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
-
       <CreateEditChoreDialogContent
         mode="create"
         initialState={{

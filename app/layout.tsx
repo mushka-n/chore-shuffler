@@ -5,8 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import NavTabs from "./nav-tabs";
 import { twMerge } from "tailwind-merge";
 import NavBar from "./nav-bar";

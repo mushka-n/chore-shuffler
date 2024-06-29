@@ -1,9 +1,8 @@
 "use client";
 
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
 import * as React from "react";
 import { SelectChore } from "@/database/types";
-import { useState } from "react";
 import CreateEditChoreDialogContent from "./content";
 import { updateChore } from "@/actions/chores/updateChore";
 
@@ -15,21 +14,15 @@ type EditChoreDialogProps = {
 
 const EditChoreDialog = ({
   initialState,
-  isOpen: extIsOpen,
-  setIsOpen: extSetIsOpen,
+  isOpen,
+  setIsOpen,
 }: EditChoreDialogProps) => {
-  const [intIsOpen, setIntIsOpen] = useState<boolean>(false);
-  const [isOpen, setIsOpen] =
-    extIsOpen !== undefined && extSetIsOpen
-      ? [extIsOpen, extSetIsOpen]
-      : [intIsOpen, setIntIsOpen];
-
   const onSubmitForm = async (chore: SelectChore) => {
     await updateChore(chore);
   };
 
   const onCloseDialog = () => {
-    if (isOpen && setIsOpen) setIsOpen(false);
+    setIsOpen(false);
   };
 
   return (
