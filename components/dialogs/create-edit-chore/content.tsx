@@ -11,13 +11,13 @@ import {
 import * as React from "react";
 import { InsertChore, Repetition, SelectChore } from "@/database/types";
 import { Button } from "@/components/ui/button";
-import RepetitionsForm from "./forms/repetitions";
 import ChoreTitleForm from "./forms/chore-title";
 import ChorePointsForm from "./forms/chore-points";
-import ChoreAssigneeForm from "./forms/assignee";
+import ChoreAssigneeForm from "./forms/chore-assignee";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import ChoreRepetitionsForm from "./forms/chore-repetitions";
 
 type CreateChoreDialogContentProps = (
   | {
@@ -91,14 +91,14 @@ const CreateEditChoreDialogContent = ({
     <DialogContent className="w-fit max-w-fit gap-8">
       <DialogHeader>
         <DialogTitle>
-          {mode === "create" && "Create a schedule entry"}
-          {mode === "edit" && "Edit a schedule entry"}
+          {mode === "create" && "Create a new chore"}
+          {mode === "edit" && "Edit chore"}
         </DialogTitle>
         <DialogDescription>
           {mode === "create" &&
-            "Fill in the fields to create a new schedule entry. Click a submit button when you're done."}
+            "Fill in the fields to create a new chore. Click a submit button when you`re done."}
           {mode === "edit" &&
-            "Edit the fields to update the schedule entry. Click a save button when you're done."}
+            "Edit the fields to update the chore. Click a save button when you`re done."}
         </DialogDescription>
       </DialogHeader>
 
@@ -107,7 +107,7 @@ const CreateEditChoreDialogContent = ({
         <ChorePointsForm points={points} setPoints={setPoints} />
         <ChoreAssigneeForm assignee={assignee} setAssignee={setAssignee} />
         <Separator className="my-3 w-[calc(100%-32px)] ml-4" />
-        <RepetitionsForm
+        <ChoreRepetitionsForm
           repetitions={repetitionsRaw}
           setRepetitions={setRepetitions}
         />

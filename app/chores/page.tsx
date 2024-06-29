@@ -1,7 +1,7 @@
 import ChoresContent from "./content";
 import { getChores } from "@/actions/chores/getChores";
 
-const SchedulePage = async () => {
+const ChoresPage = async () => {
   let chores = await getChores();
 
   return (
@@ -11,4 +11,4 @@ const SchedulePage = async () => {
   );
 };
 
-export default SchedulePage;
+export default ChoresPage;

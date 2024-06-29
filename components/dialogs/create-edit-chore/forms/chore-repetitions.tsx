@@ -19,17 +19,17 @@ import { Button } from "@/components/ui/button";
 import { Plus, Trash } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-interface RepetitionsFormProps {
+interface ChoreRepetitionsFormProps {
   repetitions: ({ key: number } & Repetition)[];
   setRepetitions: React.Dispatch<
     React.SetStateAction<({ key: number } & Repetition)[]>
   >;
 }
 
-const RepetitionsForm = ({
+const ChoreRepetitionsForm = ({
   repetitions,
   setRepetitions,
-}: RepetitionsFormProps) => {
+}: ChoreRepetitionsFormProps) => {
   const onAddRepetition = () => {
     const newRepetition = { key: Date.now(), weekdays: [], frequency: 0 };
     setRepetitions((prev) => [...prev, newRepetition]);
@@ -141,4 +141,4 @@ const RepetitionsForm = ({
   );
 };
 
-export default RepetitionsForm;
+export default ChoreRepetitionsForm;

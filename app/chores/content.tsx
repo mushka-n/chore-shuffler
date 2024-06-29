@@ -18,9 +18,9 @@ import React, { useState } from "react";
 import EditChoreDialog from "@/components/dialogs/create-edit-chore/edit-chore";
 
 const ChoresContent = ({ data }: { data: Chore[] }) => {
-  const [scheduleEntryEditingId, setScheduleEntryEditingId] = useState<
-    number | null
-  >(null);
+  const [choreEditingId, setChoreEntryEditingId] = useState<number | null>(
+    null
+  );
 
   return (
     <div className="w-full grid grid-rows-1 gap-4 grid-cols-1 px-4 max-w-[800px]">
@@ -30,8 +30,8 @@ const ChoresContent = ({ data }: { data: Chore[] }) => {
           className="w-full h-fit flex flex-col gap-5 dark:bg-neutral-900 p-4 rounded-md border border-neutral-800 relative min-w-[500px]"
         >
           <EditChoreDialog
-            isOpen={scheduleEntryEditingId === chore.id}
-            setIsOpen={() => setScheduleEntryEditingId(null)}
+            isOpen={choreEditingId === chore.id}
+            setIsOpen={() => setChoreEntryEditingId(null)}
             initialState={{
               ...chore,
               assignee: chore.assignee?.id || null,
@@ -107,7 +107,7 @@ const ChoresContent = ({ data }: { data: Chore[] }) => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
-                  onClick={(e) => setScheduleEntryEditingId(chore.id)}
+                  onClick={(e) => setChoreEntryEditingId(chore.id)}
                   className="flex items-center cursor-pointer h-8"
                 >
                   <Edit className="mr-2 h-4 w-4" />
