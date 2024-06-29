@@ -49,9 +49,9 @@ const ChoreAssigneeForm = ({ assignee, setAssignee }: ChoreTitleFormProps) => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {users.map((assignee) => (
-                <SelectItem key={assignee.id} value={`${assignee.id}`}>
-                  {assignee.name}
+              {users.map((user) => (
+                <SelectItem key={user.id} value={`${user.id}`}>
+                  {user.name}
                 </SelectItem>
               ))}
             </SelectGroup>

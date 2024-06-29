@@ -72,12 +72,13 @@ const RepetitionsForm = ({
         <div key={key} className="flex gap-2">
           <div className="flex gap-2  items-center justify-center self-center">
             <Select
+              value={`${frequency}`}
               onValueChange={(newFrequency) =>
                 onEditRepetitionFrequency(key, newFrequency)
               }
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select frequency" />
+                <SelectValue>{getRepetition(frequency)}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
