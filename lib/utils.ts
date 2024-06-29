@@ -33,34 +33,6 @@ export const getWeekDay = (weekday: number | string) => {
   }
 };
 
-export const getShortWeekDay = (weekday: number | string) => {
-  switch (weekday) {
-    case 1:
-    case "1":
-      return "Mon";
-    case 2:
-    case "2":
-      return "Tue";
-    case 3:
-    case "3":
-      return "Wed";
-    case 4:
-    case "4":
-      return "Thu";
-    case 5:
-    case "5":
-      return "Fri";
-    case 6:
-    case "6":
-      return "Sat";
-    case 7:
-    case "7":
-      return "Sun";
-    default:
-      return "Unknown";
-  }
-};
-
 export const getRepetition = (repetition: number) => {
   switch (repetition) {
     case 1:
