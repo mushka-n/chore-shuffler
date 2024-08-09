@@ -1,30 +1,36 @@
 "use client";
 
-import CreateChoreDialog from "@/components/dialogs/create-edit-chore/create-chore";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface NavBarProps {}
 
 const NavBar = ({}: NavBarProps) => {
-  const [createChoreDialogIsOpen, setCreateChoreDialogIsOpen] =
-    useState<boolean>(false);
+  const pathname = usePathname();
 
   return (
     <nav className="flex items-center border-box justify-between p-4 px-8 bg-neutral-900 border-b border-neutral-800">
       <div className="text-lg font-bold">Chore Shuffler</div>
-      <CreateChoreDialog
-        isOpen={createChoreDialogIsOpen}
-        setIsOpen={setCreateChoreDialogIsOpen}
-      />
-      <Button
-        className="w-fit flex gap-2"
-        onClick={() => setCreateChoreDialogIsOpen(true)}
-      >
-        <Plus className="h-4 w-4" />
-        Create chore
-      </Button>
+
+      <Tabs defaultValue={pathname} className="">
+        <TabsList className="dark:bg-neutral-900 gap-8">
+          <TabsTrigger
+            asChild
+            value="/week-shuffle"
+            className=" data-[state=active]:dark:bg-neutral-900 p-0"
+          >
+            <Link href="/week-shuffle">Week Shuffle</Link>
+          </TabsTrigger>
+          <TabsTrigger
+            asChild
+            value="/chores"
+            className=" data-[state=active]:dark:bg-neutral-900 p-0"
+          >
+            <Link href="/chores">Chore List</Link>
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
     </nav>
   );
 };

@@ -68,7 +68,7 @@ const CreateEditChoreDialogContent = ({
         const id = initialState.id;
         onSubmitForm({ id, title, points, repetitions, assignee });
       }
-      onClose();
+      onCloseDialog();
     } catch (err: any) {
       console.error(err);
       toast({
@@ -79,7 +79,7 @@ const CreateEditChoreDialogContent = ({
     }
   };
 
-  const onClose = () => {
+  const onCancel = () => {
     setTitle(initialState.title);
     setPoints(initialState.points);
     setRepetitions(initialState.repetitions.map((r, key) => ({ key, ...r })));
@@ -114,7 +114,7 @@ const CreateEditChoreDialogContent = ({
       </div>
 
       <DialogFooter>
-        <Button variant={"secondary"} onClick={onClose}>
+        <Button variant={"secondary"} onClick={onCancel}>
           Cancel
         </Button>
         <Button onClick={onSubmit}>

@@ -1,15 +1,16 @@
+import dynamic from "next/dynamic";
 import { createWeekSchedule } from "@/actions/week-shuffle/createWeekSchedule";
 
-interface WeekShufflePageProps {}
+const LazyPageContent = dynamic(() => import("./content"), {
+  loading: () => <h1>Loading</h1>,
+});
 
-const WeekShufflePage = async ({}: WeekShufflePageProps) => {
+const WeekShufflePage = async () => {
   const schedule = await createWeekSchedule();
 
   return (
     <>
-      {schedule.map((day) =>
-        day.map(({ assignee, chores }) => chores.map((c) => c.title))
-      )}
+      <LazyPageContent schedule={schedule} />
     </>
   );
 };

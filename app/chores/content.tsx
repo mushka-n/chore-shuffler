@@ -27,7 +27,7 @@ const ChoresContent = ({ data }: { data: Chore[] }) => {
       {data.map((chore) => (
         <div
           key={chore.id}
-          className="w-full h-fit flex flex-col gap-5 dark:bg-neutral-900 p-4 rounded-md border border-neutral-800 relative min-w-[500px]"
+          className="w-full h-fit flex flex-col gap-5 dark:bg-neutral-900 p-4 rounded-sm border border-neutral-800 relative min-w-[500px]"
         >
           <EditChoreDialog
             isOpen={choreEditingId === chore.id}
@@ -99,13 +99,13 @@ const ChoresContent = ({ data }: { data: Chore[] }) => {
           </div>
 
           <div className="absolute top-4 right-4">
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" sticky="always">
                 <DropdownMenuItem
                   onClick={(e) => setChoreEntryEditingId(chore.id)}
                   className="flex items-center cursor-pointer h-8"
@@ -118,8 +118,10 @@ const ChoresContent = ({ data }: { data: Chore[] }) => {
                   onClick={() => deleteChore(chore.id)}
                   className="flex items-center cursor-pointer h-8"
                 >
-                  <Trash className="mr-2 h-4 w-4 " />
-                  <span className="leading-4 mt-[2px] ">Delete</span>
+                  <Trash className="mr-2 h-4 w-4 stroke-red-500" />
+                  <span className="leading-4 mt-[2px] text-red-500">
+                    Delete
+                  </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -14,6 +14,7 @@ export const calculateChoresPointsSumDiff = <T extends { points: number }>(
 
 // Takes an array of elements to distribute [1, 2, ...] and an array of subsets to fill [[3, 4], [5, 6], ...]
 // Returns an array of subsets with the elements distributed [[3, 4, 1, 2], [5, 6], ...]
+// elements are distributed in a way so arrays' sums are as close to equal as possible
 export const distributeChoresBetweenSubsets = <T extends { points: number }>(
   choresToDistribute: T[],
   subsetsToFill: T[][]
